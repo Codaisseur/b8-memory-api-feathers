@@ -1,18 +1,38 @@
+const { authenticate } = require('feathers-authentication').hooks;
+const { restrictToAuthenticated } = require('feathers-authentication-hooks');
+const { populate } = require('feathers-hooks-common');
 
+const restrict = [
+  authenticate('jwt'),
+  restrictToAuthenticated(),
+]
+
+const createGame = require('../../hooks/create-game');
+
+const ownerSchema = {
+  include: {
+    service: 'users',
+    nameAs: 'owner',
+    parentField: 'userId',
+    childField: '_id',
+  }
+};
 
 module.exports = {
   before: {
-    all: [],
+    all: [ ...restrict ],
     find: [],
     get: [],
-    create: [],
+    create: [createGame()],
     update: [],
     patch: [],
     remove: []
   },
 
   after: {
-    all: [],
+    all: [
+      populate({ schema: ownerSchema }),
+    ],
     find: [],
     get: [],
     create: [],
