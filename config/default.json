@@ -6,5 +6,30 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://localhost:27017/feathers_memory_api"
+  "mongodb": "mongodb://localhost:27017/feathers_memory_api",
+  "authentication": {
+    "secret": "2820c7cf05745a2b50da9754bd1386896160a9d713f69efcbc9375eeb8a95ad031d6a41057e485ccaabeed9083756771386644479e49525a070d4fc4667cf0def93bdbf086f48d3f37ae68d9009e19669ff94074606c2c5c6b1f07c77d0fb5324b6289259c45fdf70fe5a0c839156a20d437a539d9392a48edc4c1d6120d024158db21569b7f2d8591f6604c609c60d361200a16c099f3e6427d8bf5be64a2b1a7d58780d6e30d9bcb8947f6c985fe8daf97f96975b647686d32e5b146c65ea4b9f5179fc54e492737426609ffe78b020b3f04885754fb41e1c63cce670e67e542fec682688916ef391c336a4693f74e0510c742549baa86bdb9786ca2399ff1",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "service": "users",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
 }
