@@ -27,6 +27,7 @@ module.exports = function (app) {
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
     lastCard: { type: Number },
+    draw: { type: Boolean, default: false },
   });
 
   return mongooseClient.model('games', games);

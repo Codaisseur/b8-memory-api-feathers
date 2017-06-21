@@ -22,6 +22,8 @@ const joinGame = require('../../hooks/join-game');
 
 const flipCard = require('../../hooks/flip-card');
 
+const gameStats = require('../../hooks/game-stats');
+
 module.exports = {
   before: {
     all: [ ...restrict ],
@@ -34,9 +36,7 @@ module.exports = {
   },
 
   after: {
-    all: [
-      populate({ schema: ownerSchema }),
-    ],
+    all: [populate({ schema: ownerSchema }), gameStats()],
     find: [],
     get: [],
     create: [],

@@ -67,8 +67,17 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
             });
 
             const wonCards = hook.data.cards.filter((c) => (c.won));
+
             if (wonCards.length === cards.length) {
-              hook.data.winnerId = user._id;
+              const ranked = newPlayers.sort((a, b) => (b.pairs.length - a.pairs.length));
+              const winner = ranked[0];
+              const secondPlace = ranked[1];
+
+              if (secondPlace && secondPlace.pairs.length === winner.pairs.length) {
+                hook.data.draw = true;
+              } else {
+                hook.data.winnerId = winner.userId;
+              }
             }
 
             // done! Player won this pair, keeps the turn
