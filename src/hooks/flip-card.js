@@ -46,6 +46,9 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         if (visibleCards.length === 2) {
           const symbols = visibleCards.map((c) => (c.symbol))
 
+          // set the lastCard
+          hook.data.lastCard = hook.data.flip;
+
           // flip all the cards back to not visible
           hook.data.cards = cards.map((c) => (
             Object.assign({}, c, { visible: false }))
@@ -62,6 +65,12 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
               }
               return c;
             });
+
+            const wonCards = hook.data.cards.filter((c) => (c.won));
+            if (wonCards.length === cards.length) {
+              hook.data.winnerId = user._id;
+            }
+
             // done! Player won this pair, keeps the turn
             return hook;
           }
@@ -76,6 +85,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
         // flip the card :)
         hook.data.cards = newCards;
+        // unset the lastCard
+        hook.data.lastCard = null;
 
         console.log(hook.data);
 
