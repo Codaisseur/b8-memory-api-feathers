@@ -1,4 +1,5 @@
 {
-  "host": "feathers-memory-api-app.feathersjs.com",
-  "port": "PORT"
+  "host": "memoryb8api.herokuapp.com",
+  "port": "PORT",
+  "mongodb": "MONGODB_URI"
 }

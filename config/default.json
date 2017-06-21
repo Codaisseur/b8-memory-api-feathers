@@ -19,9 +19,9 @@
       "header": {
         "type": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "https://memoryb8api.herokuapp.com",
       "subject": "anonymous",
-      "issuer": "feathers",
+      "issuer": "memory8api",
       "algorithm": "HS256",
       "expiresIn": "1d"
     },
