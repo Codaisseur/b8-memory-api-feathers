@@ -18,14 +18,18 @@ const ownerSchema = {
   }
 };
 
+const joinGame = require('../../hooks/join-game');
+
+const flipCard = require('../../hooks/flip-card');
+
 module.exports = {
   before: {
     all: [ ...restrict ],
     find: [],
     get: [],
     create: [createGame()],
-    update: [],
-    patch: [],
+    update: [joinGame(), flipCard()],
+    patch: [joinGame(), flipCard()],
     remove: []
   },
 
